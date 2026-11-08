@@ -1,29 +1,56 @@
 -- options
 vim.g.mapleader=' '
+
+-- number
 vim.opt.cul=true
 vim.opt.nu=true
 vim.opt.rnu=true
+
+-- autowrite autochdir 
 vim.opt.autochdir=true
 vim.opt.autowrite=true
 vim.opt.hidden=true
+
+-- tabstop
 vim.opt.tabstop=2
 vim.opt.softtabstop=2
 vim.opt.expandtab=true
 
+-- windows options
+vim.opt.splitbelow=true
+vim.opt.splitright=true
+
+-- search
+vim.opt.hlsearch=true
+vim.opt.incsearch=true
+
+vim.opt.scrolloff=10
+vim.opt.wildmenu=true
+vim.opt.ic=true
+vim.opt.signcolumn="yes"
+
 -- keymaps
 local map = vim.keymap.set
 
-map('n','<leader>s','<cmd>w<cr>')
-map('n','<leader>r','<cmd>source %<cr>')
+map('n','<c-s>','<cmd>w<cr>')
+map('n','<c-q>','<cmd>q<cr>')
+map('n','<c-r>','<cmd>source %<cr>')
+map('n','<leader>/','<cmd>nohls<cr>')
+
 
 -- plugins
-vim.pack.add({
-	{src="https://github.com/rose-pine/neovim"},
-	{src="https://github.com/neovim/nvim-lspconfig"},
-	{src="https://github.com/mason-org/mason.nvim"},
-	{src="https://github.com/mason-org/mason-lspconfig.nvim"},
-	{src="https://github.com/neanias/everforest-nvim"},
+local pre_url="https://github.com/"
+local getPluginsUrl=function(url)
+        url = pre_url..url 
+        return url
+end
 
+vim.pack.add({
+	{src=getPluginsUrl("rose-pine/neovim")},
+	{src=getPluginsUrl("neovim/nvim-lspconfig")},
+	{src=getPluginsUrl("mason-org/mason.nvim")},
+	{src=getPluginsUrl("mason-org/mason-lspconfig.nvim")},
+	{src=getPluginsUrl("neanias/everforest-nvim")},
 })
 
 require("rose-pine").setup({
@@ -37,13 +64,12 @@ require("rose-pine").setup({
 require("everforest").setup({
 })
 
-
--- vim.cmd("colorscheme rose-pine")
+-- cmd
 vim.cmd("colorscheme everforest")
+vim.cmd("nohls")
 
 require("mason").setup()
 
 require("mason-lspconfig").setup {
     automatic_enable = false
 }
-
