@@ -1,5 +1,8 @@
 -- options
 vim.g.mapleader=' '
+vim.opt.termguicolors = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- number
 vim.opt.cul=true
@@ -46,30 +49,36 @@ local getPluginsUrl=function(url)
 end
 
 vim.pack.add({
-	{src=getPluginsUrl("rose-pine/neovim")},
-	{src=getPluginsUrl("neovim/nvim-lspconfig")},
-	{src=getPluginsUrl("mason-org/mason.nvim")},
-	{src=getPluginsUrl("mason-org/mason-lspconfig.nvim")},
-	{src=getPluginsUrl("neanias/everforest-nvim")},
+        {src=getPluginsUrl("rose-pine/neovim")},
+        {src=getPluginsUrl("neovim/nvim-lspconfig")},
+        {src=getPluginsUrl("mason-org/mason.nvim")},
+        {src=getPluginsUrl("mason-org/mason-lspconfig.nvim")},
+        {src=getPluginsUrl("neanias/everforest-nvim")},
+        {src=getPluginsUrl("nvim-tree/nvim-tree.lua")},
 })
 
 require("rose-pine").setup({
-	style={
-		bold = false,
-		italic=true,
-		transparency=true,
-	}
+        style={
+                bold = false,
+                italic=true,
+                transparency=true,
+        }
 })
 
 require("everforest").setup({
 })
 
--- cmd
-vim.cmd("colorscheme everforest")
-vim.cmd("nohls")
 
 require("mason").setup()
 
+
+-- NvimTree
+require("nvim-tree").setup()
+
 require("mason-lspconfig").setup {
-    automatic_enable = false
+        automatic_enable = false
 }
+
+-- cmd
+vim.cmd("colorscheme everforest")
+vim.cmd("nohls")
